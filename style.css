@@ -59,6 +59,29 @@ section { padding: 100px 0; }
 .founder-name { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
 .founder-role { font-size: 13px; color: var(--teal); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 24px; }
 .founder-bio { font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 40px; }
+.exp-heading {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 25px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 24px; /* Malo povećan razmak da kartice ne "guše" crticu */
+  letter-spacing: 0.3px;
+  position: relative;
+  padding-bottom: 8px; /* Razmak između teksta i crtice */
+  display: inline-block;
+}
+
+/* Blaga, mala dekorativna crta ispod podnaslova */
+.exp-heading::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 36px;          /* Mala dužina crte koja prati premium estetiku */
+  height: 1.5px;        /* Veoma tanka i suptilna crta */
+  background: var(--teal); /* Koristi tvoju prepoznatljivu tirkiznu boju */
+  opacity: 0.6;         /* Blaga providnost kako crta ne bi bila napadna */
+}
 .exp-cards { display: flex; flex-direction: column; gap: 14px; }
 .exp-card { display: flex; align-items: center; gap: 20px; background: white; border-radius: 6px; padding: 18px 22px; border-left: 3px solid var(--teal); box-shadow: 0 2px 16px rgba(13,31,45,0.05); transition: transform 0.2s, box-shadow 0.2s; }
 .exp-card:hover { transform: translateX(4px); box-shadow: 0 4px 24px rgba(13,31,45,0.1); }
