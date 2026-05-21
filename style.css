@@ -1,4 +1,4 @@
-:root {
+  :root {
   --navy: #0d1f2d;
   --teal: #2a7f87;
   --teal-light: #3aa8b2;
@@ -153,11 +153,20 @@ footer a { color: var(--teal-light); text-decoration: none; }
 /* ── OBJAVE ── */
 #objave { background: var(--cream); }
 
+/* Glavni stil za mrežu objava na desktopu (ekrani širi od 768px) */
 .objave-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 28px;
-  margin-top: 56px;
+  grid-template-columns: repeat(2, 1fr); /* Ovo kreira tačno 2 kolone jednake širine (50% / 50%) */
+  gap: 32px;                             /* Razmak između dvije kartice */
+  width: 100%;
+}
+
+/* Prilagođavanje za mobilne telefone da se kartice slažu jedna ispod druge */
+@media (max-width: 768px) {
+  .objave-grid {
+    grid-template-columns: 1fr;          /* Na mobilnom zauzimaju punu širinu (100%) */
+    gap: 24px;
+  }
 }
 
 .objava-card {
