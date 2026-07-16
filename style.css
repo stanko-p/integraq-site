@@ -153,23 +153,34 @@ footer a { color: var(--teal-light); text-decoration: none; }
 /* ── OBJAVE ── */
 #objave { background: var(--cream); }
 
-/* Glavni stil za mrežu objava na desktopu (ekrani širi od 768px) */
-.objave-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Ovo kreira tačno 2 kolone jednake širine (50% / 50%) */
-  gap: 32px;                             /* Razmak između dvije kartice */
+.objave-slider-wrapper {
+  position: relative;
   width: 100%;
 }
 
-/* Prilagođavanje za mobilne telefone da se kartice slažu jedna ispod druge */
-@media (max-width: 768px) {
-  .objave-grid {
-    grid-template-columns: 1fr;          /* Na mobilnom zauzimaju punu širinu (100%) */
-    gap: 24px;
-  }
+/* Nova klizna mreža (koristi flex) */
+.objave-grid {
+  display: flex;
+  gap: 32px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Skriva scrollbar u Firefox-u */
+  -ms-overflow-style: none; /* Skriva scrollbar u IE/Edge */
+  padding-bottom: 20px; /* Prostor za senke kartica */
+  width: 100%;
 }
 
+/* Skriva scrollbar u Chrome/Safari */
+.objave-grid::-webkit-scrollbar {
+  display: none;
+}
+
+/* Kartice sa flex podešavanjem za slajder */
 .objava-card {
+  flex: 0 0 calc(50% - 16px); /* Tačno 2 kartice na ekranu */
+  scroll-snap-align: start;
   background: white;
   border-radius: 8px;
   padding: 32px 28px;
@@ -237,14 +248,52 @@ footer a { color: var(--teal-light); text-decoration: none; }
 }
 
 @media (max-width: 900px) {
-  .objave-grid { grid-template-columns: repeat(2, 1fr); }
+  .objava-card {
+    flex: 0 0 calc(50% - 16px);
+  }
 }
 
 @media (max-width: 768px) {
-  .objave-grid { grid-template-columns: 1fr; }
+  .objava-card {
+    flex: 0 0 100%; /* Jedna kartica na mobilnom */
+  }
+  .prev-arrow { left: -10px; }
+  .next-arrow { right: -10px; }
+  .objave-grid {
+    gap: 24px;
+  }
 }
 
-/* ── DODATAK ZA SLIKU I LINK U KARTICAMA OBJAVA ── */
+/* Stilovi za strelice */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: var(--teal);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(13, 31, 45, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.slider-arrow:hover {
+  background: var(--teal-light);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.prev-arrow { left: -22px; }
+.next-arrow { right: -22px; }
+
+/* Slike i linkovi u karticama */
 .objava-img-wrap {
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -290,4 +339,20 @@ footer a { color: var(--teal-light); text-decoration: none; }
 .objava-card:hover .objava-link span,
 .objava-link:hover span {
   transform: translateX(4px);
+}
+/* --- FUNKCIJA ZA PROŠIRIVANJE TEKSTA UNUTAR OBJAVE --- */
+.expandable-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 4; /* Ovde biraš koliko redova se vidi pre klika */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.expandable-text.expanded {
+  -webkit-line-clamp: unset;
+  display: block;
+}
+
+.expand-btn {
+  cursor: pointer;
 }
