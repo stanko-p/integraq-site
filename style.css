@@ -340,19 +340,80 @@ footer a { color: var(--teal-light); text-decoration: none; }
 .objava-link:hover span {
   transform: translateX(4px);
 }
-/* --- FUNKCIJA ZA PROŠIRIVANJE TEKSTA UNUTAR OBJAVE --- */
-.expandable-text {
-  display: -webkit-box;
-  -webkit-line-clamp: 4; /* Ovde biraš koliko redova se vidi pre klika */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+
+/* =======================================================
+   POJEDINAČNA STRANICA OBJAVE (SINGLE POST)
+======================================================= */
+
+.single-post-section {
+  /* Gornji padding je veći kako navigacija ne bi prekrila naslov */
+  padding: 120px 20px 80px; 
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.expandable-text.expanded {
-  -webkit-line-clamp: unset;
-  display: block;
+.single-post-meta {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.9rem;
+  color: #666;
 }
 
-.expand-btn {
-  cursor: pointer;
+.single-post-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem;
+  line-height: 1.2;
+  color: #222;
+  margin-bottom: 30px;
+}
+
+.single-post-image {
+  width: 100%;
+  max-height: 450px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08); /* Blaga senka za moderniji izgled */
+}
+
+.single-post-content {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #444;
+}
+
+.single-post-content p {
+  margin-bottom: 20px;
+}
+
+.single-post-content strong {
+  font-weight: 500;
+  color: #222;
+}
+
+.single-post-cta {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #eaeaea; /* Tanka linija koja odvaja tekst od dugmeta */
+  display: flex;
+  justify-content: center;
+}
+
+/* Prilagođavanje za mobilne telefone */
+@media screen and (max-width: 768px) {
+  .single-post-section {
+    padding: 100px 15px 50px;
+  }
+  
+  .single-post-title {
+    font-size: 2rem;
+  }
+  
+  .single-post-image {
+    max-height: 300px;
+  }
 }
