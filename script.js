@@ -42,24 +42,3 @@ if (objaveSlider && prevObjavaBtn && nextObjavaBtn) {
     }
   });
 }
-// --- Funkcija za "Pročitajte više" / proširivanje teksta u kartici ---
-document.querySelectorAll('.expand-btn').forEach(button => {
-  button.addEventListener('click', function(e) {
-    e.preventDefault(); // Sprečava da te link vrati na vrh stranice
-    
-    // Traži tekstualni element unutar iste objave
-    const card = this.closest('.objava-card');
-    const text = card.querySelector('.expandable-text');
-    
-    if (text) {
-      text.classList.toggle('expanded');
-      
-      // Menja tekst dugmeta zavisno od stanja
-      if (text.classList.contains('expanded')) {
-        this.innerHTML = 'Prikaži manje <span>↑</span>';
-      } else {
-        this.innerHTML = 'Pročitajte više <span>→</span>';
-      }
-    }
-  });
-});
